@@ -10,134 +10,219 @@
     />
     <style>
       :root {
-        /* 保持粉紫系配色 */
         --stardust-white: #f4f3fe;
         --nebula-pink: #ff6ec7;
         --cosmic-purple: #8a4fff;
         --moonlight-silver: #d0d5f9;
         --card-bg: rgba(244, 243, 254, 0.15);
-        --cyber-orange: #ff9a35; /* 新增点缀色 */
       }
 
-      /* 标题特效升级 */
+      body {
+        background: linear-gradient(135deg, #1a1a2f 0%, #2d1b44 100%);
+        min-height: 100vh;
+        font-family: "Orbitron", sans-serif;
+        margin: 0;
+        padding: 2rem;
+        color: var(--stardust-white);
+      }
+
+      @keyframes breathe {
+        0% {
+          box-shadow: 0 0 20px rgba(255, 110, 199, 0.5);
+        }
+        50% {
+          box-shadow: 0 0 40px rgba(255, 110, 199, 0.8);
+        }
+        100% {
+          box-shadow: 0 0 20px rgba(255, 110, 199, 0.5);
+        }
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .hero {
+        text-align: center;
+        margin-bottom: 5rem;
+        position: relative;
+      }
+
+      .avatar {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        border: 3px solid var(--moonlight-silver);
+        margin: 2rem auto;
+        box-shadow: 0 0 40px rgba(255, 110, 199, 0.3);
+        transition: transform 0.5s ease;
+      }
+
+      .avatar:hover {
+        transform: rotate(360deg);
+      }
+
       .title {
+        display: flex;
+        justify-content: center;
+        align-items: baseline;
         font-size: 4rem;
         margin: 2rem 0;
-        text-transform: uppercase;
         letter-spacing: 3px;
-        position: relative;
-        display: inline-block;
+        animation: breathe 3s infinite alternate;
+      }
+
+      .title span {
+        background: linear-gradient(
+          45deg,
+          var(--nebula-pink) 30%,
+          var(--cosmic-purple) 70%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-transform: uppercase;
       }
 
       .title span:first-child {
         background: linear-gradient(
           45deg,
-          var(--nebula-pink) 30%,
-          var(--cyber-orange) 70%
-        );
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        animation: mercury-glow 2s ease-in-out infinite;
-      }
-
-      .title span:last-child {
-        background: linear-gradient(
-          45deg,
-          var(--cyber-orange) 30%,
-          var(--cosmic-purple) 70%
-        );
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        animation: space-glow 2s ease-in-out infinite;
-      }
-
-      @keyframes mercury-glow {
-        0% {
-          text-shadow: 0 0 10px var(--nebula-pink);
-        }
-        50% {
-          text-shadow: 0 0 20px var(--nebula-pink), 0 0 30px var(--cyber-orange);
-        }
-        100% {
-          text-shadow: 0 0 10px var(--nebula-pink);
-        }
-      }
-
-      @keyframes space-glow {
-        0% {
-          text-shadow: 0 0 10px var(--cosmic-purple);
-        }
-        50% {
-          text-shadow: 0 0 20px var(--cosmic-purple),
-            0 0 30px var(--moonlight-silver);
-        }
-        100% {
-          text-shadow: 0 0 10px var(--cosmic-purple);
-        }
-      }
-
-      /* 卡片特效升级 */
-      .card {
-        /* 保持原有样式 */
-        overflow: visible; /* 允许特效溢出 */
-      }
-
-      .card::after {
-        content: "";
-        position: absolute;
-        top: -2px;
-        left: -2px;
-        right: -2px;
-        bottom: -2px;
-        background: linear-gradient(
-          45deg,
           var(--nebula-pink),
-          var(--cyber-orange),
-          var(--cosmic-purple)
+          var(--moonlight-silver)
         );
-        z-index: -1;
-        animation: border-run 3s linear infinite;
-        opacity: 0;
-        transition: opacity 0.3s;
-        border-radius: 20px;
       }
 
-      .card:hover::after {
-        opacity: 0.8;
+      .title::after {
+        content: "✦";
+        position: absolute;
+        right: -30px;
+        top: -15px;
+        font-size: 1.2rem;
+        color: var(--moonlight-silver);
+        animation: sparkle 1.5s infinite;
       }
 
-      @keyframes border-run {
+      @keyframes sparkle {
         0% {
-          background-position: 0% 50%;
+          opacity: 0;
         }
         50% {
-          background-position: 100% 50%;
+          opacity: 1;
         }
         100% {
-          background-position: 0% 50%;
+          opacity: 0;
         }
+      }
+
+      .social-cards {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 3rem;
+        padding: 2rem;
+      }
+
+      .card {
+        background: var(--card-bg);
+        border-radius: 20px;
+        padding: 2.5rem;
+        text-align: center;
+        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        position: relative;
       }
 
       .card:hover {
-        transform: translateY(-10px) scale(1.05);
-        box-shadow: 0 20px 40px rgba(138, 79, 255, 0.3);
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0 15px 35px rgba(138, 79, 255, 0.2);
       }
 
-      /* 新增悬浮粒子特效 */
-      .card:hover .social-icon {
-        animation: icon-float 1s ease-in-out infinite;
+      .card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 20px;
+        padding: 2px;
+        background: linear-gradient(
+          135deg,
+          var(--nebula-pink) 0%,
+          var(--cosmic-purple) 50%,
+          var(--moonlight-silver) 100%
+        );
+        -webkit-mask: linear-gradient(#fff 0 0) content-box,
+          linear-gradient(#fff 0 0);
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        opacity: 0.3;
       }
 
-      @keyframes icon-float {
-        0%,
-        100% {
-          transform: translateY(0);
+      .social-icon {
+        font-size: 2.8rem;
+        margin-bottom: 1.5rem;
+        color: var(--moonlight-silver);
+        text-shadow: 0 0 15px var(--cosmic-purple);
+      }
+
+      .card h2 {
+        color: var(--stardust-white);
+        margin: 1.5rem 0;
+        font-weight: 500;
+        letter-spacing: 2px;
+      }
+
+      .card p {
+        color: var(--moonlight-silver);
+        line-height: 1.8;
+        font-size: 1rem;
+        min-height: 60px;
+      }
+
+      .card a {
+        display: inline-block;
+        margin-top: 2rem;
+        padding: 1rem 2.5rem;
+        background: linear-gradient(
+          135deg,
+          var(--nebula-pink) 0%,
+          var(--cosmic-purple) 100%
+        );
+        color: white !important;
+        border-radius: 30px;
+        text-decoration: none;
+        position: relative;
+        overflow: hidden;
+        transition: box-shadow 0.3s ease;
+      }
+
+      .card a:hover {
+        box-shadow: 0 5px 15px rgba(255, 110, 199, 0.4);
+      }
+
+      @media (max-width: 1024px) {
+        .social-cards {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 2rem;
         }
-        50% {
-          transform: translateY(-5px);
+      }
+
+      @media (max-width: 768px) {
+        .social-cards {
+          grid-template-columns: 1fr;
+        }
+        .title {
+          font-size: 2.8rem;
+        }
+        .avatar {
+          width: 160px;
+          height: 160px;
         }
       }
     </style>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div class="container">
@@ -154,8 +239,8 @@
         <!-- GitHub Card -->
         <div class="card">
           <i class="fab fa-github social-icon"></i>
-          <h2>Code Galaxy</h2>
-          <p>探索我的代码宇宙与开源星球</p>
+          <h2>CODE GALAXY</h2>
+          <p>探索我的数字宇宙与开源星球</p>
           <a href="https://github.com/Mercury-circle" target="_blank"
             >星际漫游</a
           >
@@ -163,20 +248,20 @@
 
         <!-- 知识宝库 -->
         <div class="card">
-          <i class="fas fa-brain social-icon"></i>
-          <h2>Neuro Cosmos</h2>
-          <p>技术洞见与思维火花的神经宇宙</p>
+          <i class="fas fa-book-open social-icon"></i>
+          <h2>知识秘境</h2>
+          <p>技术洞见与思维火花的收藏馆</p>
           <a href="https://zhihu.com/people/yourusername" target="_blank"
-            >思维跃迁</a
+            >智慧启航</a
           >
         </div>
 
-        <!-- 量子通讯 -->
+        <!-- 星际通讯 -->
         <div class="card">
-          <i class="fas fa-satellite social-icon"></i>
-          <h2>Quantum Link</h2>
+          <i class="fas fa-comment-dots social-icon"></i>
+          <h2>星链通讯</h2>
           <p>通过量子纠缠建立跨维度联系</p>
-          <a href="mailto:your.email@example.com">发送超波</a>
+          <a href="mailto:your.email@example.com">发送脉冲</a>
         </div>
       </div>
     </div>
