@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= config.title %></title>
+    <title>水星空间</title>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"
@@ -20,21 +20,22 @@
       body {
         background: linear-gradient(135deg, #1a1a2f 0%, #2d1b44 100%);
         min-height: 100vh;
-        font-family: "Orbitron", sans-serif;
+        font-family: "Orbitron", "Helvetica Neue", sans-serif;
         margin: 0;
         padding: 2rem;
         color: var(--stardust-white);
       }
 
-      @keyframes breathe {
+      @keyframes title-glow {
         0% {
-          box-shadow: 0 0 20px rgba(255, 110, 199, 0.5);
+          text-shadow: 0 0 10px var(--nebula-pink);
         }
         50% {
-          box-shadow: 0 0 40px rgba(255, 110, 199, 0.8);
+          text-shadow: 0 0 20px var(--nebula-pink),
+            0 0 30px var(--cosmic-purple);
         }
         100% {
-          box-shadow: 0 0 20px rgba(255, 110, 199, 0.5);
+          text-shadow: 0 0 10px var(--nebula-pink);
         }
       }
 
@@ -50,68 +51,28 @@
       }
 
       .avatar {
-        width: 200px;
-        height: 200px;
+        width: 180px;
+        height: 180px;
         border-radius: 50%;
         border: 3px solid var(--moonlight-silver);
         margin: 2rem auto;
-        box-shadow: 0 0 40px rgba(255, 110, 199, 0.3);
-        transition: transform 0.5s ease;
-      }
-
-      .avatar:hover {
-        transform: rotate(360deg);
+        box-shadow: 0 0 30px var(--cosmic-purple);
       }
 
       .title {
-        display: flex;
-        justify-content: center;
-        align-items: baseline;
-        font-size: 4rem;
+        font-size: 3.5rem;
         margin: 2rem 0;
-        letter-spacing: 3px;
-        animation: breathe 3s infinite alternate;
-      }
-
-      .title span {
         background: linear-gradient(
           45deg,
-          var(--nebula-pink) 30%,
-          var(--cosmic-purple) 70%
+          var(--nebula-pink) 50%,
+          var(--cosmic-purple) 50%
         );
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
+        animation: title-glow 2s infinite;
         text-transform: uppercase;
-      }
-
-      .title span:first-child {
-        background: linear-gradient(
-          45deg,
-          var(--nebula-pink),
-          var(--moonlight-silver)
-        );
-      }
-
-      .title::after {
-        content: "✦";
-        position: absolute;
-        right: -30px;
-        top: -15px;
-        font-size: 1.2rem;
-        color: var(--moonlight-silver);
-        animation: sparkle 1.5s infinite;
-      }
-
-      @keyframes sparkle {
-        0% {
-          opacity: 0;
-        }
-        50% {
-          opacity: 1;
-        }
-        100% {
-          opacity: 0;
-        }
+        letter-spacing: 4px;
+        font-family: "Orbitron", sans-serif;
       }
 
       .social-cards {
@@ -123,86 +84,103 @@
 
       .card {
         background: var(--card-bg);
-        border-radius: 20px;
-        padding: 2.5rem;
+        border-radius: 15px;
+        padding: 2rem;
         text-align: center;
-        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+        border: 1px solid var(--cosmic-purple);
         position: relative;
-      }
-
-      .card:hover {
-        transform: translateY(-10px) scale(1.02);
-        box-shadow: 0 15px 35px rgba(138, 79, 255, 0.2);
+        overflow: hidden;
+        backdrop-filter: blur(10px);
       }
 
       .card::before {
         content: "";
         position: absolute;
-        inset: 0;
-        border-radius: 20px;
-        padding: 2px;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
         background: linear-gradient(
-          135deg,
-          var(--nebula-pink) 0%,
-          var(--cosmic-purple) 50%,
-          var(--moonlight-silver) 100%
+          45deg,
+          var(--nebula-pink),
+          var(--cosmic-purple),
+          var(--moonlight-silver)
         );
-        -webkit-mask: linear-gradient(#fff 0 0) content-box,
-          linear-gradient(#fff 0 0);
-        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-        -webkit-mask-composite: xor;
-        mask-composite: exclude;
-        opacity: 0.3;
+        z-index: -1;
+        animation: border-glow 3s linear infinite;
+        opacity: 0.5;
+      }
+
+      @keyframes border-glow {
+        0% {
+          opacity: 0.8;
+        }
+        50% {
+          opacity: 0.3;
+        }
+        100% {
+          opacity: 0.8;
+        }
+      }
+
+      .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 0 30px var(--cosmic-purple);
+        background: rgba(244, 243, 254, 0.25);
       }
 
       .social-icon {
-        font-size: 2.8rem;
-        margin-bottom: 1.5rem;
-        color: var(--moonlight-silver);
-        text-shadow: 0 0 15px var(--cosmic-purple);
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        background: linear-gradient(
+          45deg,
+          var(--nebula-pink),
+          var(--cosmic-purple)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
       }
 
       .card h2 {
-        color: var(--stardust-white);
-        margin: 1.5rem 0;
-        font-weight: 500;
-        letter-spacing: 2px;
+        color: var(--moonlight-silver);
+        margin: 1rem 0;
+        font-weight: bold;
+        text-transform: uppercase;
       }
 
       .card p {
         color: var(--moonlight-silver);
-        line-height: 1.8;
-        font-size: 1rem;
-        min-height: 60px;
+        line-height: 1.6;
+        font-size: 0.9rem;
       }
 
       .card a {
         display: inline-block;
-        margin-top: 2rem;
-        padding: 1rem 2.5rem;
+        margin-top: 1rem;
+        padding: 0.8rem 2rem;
         background: linear-gradient(
-          135deg,
-          var(--nebula-pink) 0%,
-          var(--cosmic-purple) 100%
+          45deg,
+          var(--nebula-pink),
+          var(--cosmic-purple)
         );
         color: white !important;
-        border-radius: 30px;
+        border-radius: 25px;
         text-decoration: none;
+        transition: transform 0.3s ease;
+        border: none;
         position: relative;
         overflow: hidden;
-        transition: box-shadow 0.3s ease;
       }
 
       .card a:hover {
-        box-shadow: 0 5px 15px rgba(255, 110, 199, 0.4);
+        transform: scale(1.05);
+        box-shadow: 0 0 15px var(--nebula-pink);
       }
 
       @media (max-width: 1024px) {
         .social-cards {
           grid-template-columns: repeat(2, 1fr);
-          gap: 2rem;
         }
       }
 
@@ -211,16 +189,12 @@
           grid-template-columns: 1fr;
         }
         .title {
-          font-size: 2.8rem;
-        }
-        .avatar {
-          width: 160px;
-          height: 160px;
+          font-size: 2.5rem;
         }
       }
     </style>
     <link
-      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap"
       rel="stylesheet"
     />
   </head>
@@ -228,10 +202,7 @@
     <div class="container">
       <div class="hero">
         <img src="/images/avatar.jpg" alt="Avatar" class="avatar" />
-        <h1 class="title">
-          <span>MERCURY</span>
-          <span>SPACE</span>
-        </h1>
+        <h1 class="title">MERCURY SPACE</h1>
         <p><%= config.description %></p>
       </div>
 
@@ -239,29 +210,29 @@
         <!-- GitHub Card -->
         <div class="card">
           <i class="fab fa-github social-icon"></i>
-          <h2>CODE GALAXY</h2>
-          <p>探索我的数字宇宙与开源星球</p>
+          <h2>Code Galaxy</h2>
+          <p>探索我的代码宇宙与开源星球</p>
           <a href="https://github.com/Mercury-circle" target="_blank"
-            >星际漫游</a
+            >星际穿越</a
           >
         </div>
 
-        <!-- 知识宝库 -->
+        <!-- 知识星球 -->
         <div class="card">
-          <i class="fas fa-book-open social-icon"></i>
-          <h2>知识秘境</h2>
-          <p>技术洞见与思维火花的收藏馆</p>
+          <i class="fas fa-brain social-icon"></i>
+          <h2>知识星云</h2>
+          <p>技术文章与深度思考的聚集地</p>
           <a href="https://zhihu.com/people/yourusername" target="_blank"
-            >智慧启航</a
+            >思维跃迁</a
           >
         </div>
 
-        <!-- 星际通讯 -->
+        <!-- 量子通讯 -->
         <div class="card">
-          <i class="fas fa-comment-dots social-icon"></i>
-          <h2>星链通讯</h2>
-          <p>通过量子纠缠建立跨维度联系</p>
-          <a href="mailto:your.email@example.com">发送脉冲</a>
+          <i class="fas fa-satellite social-icon"></i>
+          <h2>量子通讯</h2>
+          <p>通过加密通道建立星际联系</p>
+          <a href="mailto:your.email@example.com">发送超波</a>
         </div>
       </div>
     </div>
