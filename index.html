@@ -108,14 +108,12 @@
           var(--moonlight-silver)
         );
         z-index: -1;
-        /* 修改这里：默认不显示动画 */
         animation: border-glow 3s linear infinite paused;
         opacity: 0;
         transition: opacity 0.3s;
       }
 
       .card:hover::before {
-        /* 悬停时启动动画 */
         animation-play-state: running;
         opacity: 0.5;
       }
@@ -168,9 +166,9 @@
         margin-top: 1rem;
         padding: 0.8rem 2rem;
         background: linear-gradient(
-          45deg,
-          var(--nebula-pink),
-          var(--cosmic-purple)
+          135deg,
+          var(--nebula-pink) 0%,
+          var(--cosmic-purple) 100%
         );
         color: white !important;
         border-radius: 25px;
