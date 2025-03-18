@@ -101,13 +101,6 @@
         left: -2px;
         right: -2px;
         bottom: -2px;
-        background: linear-gradient(
-          45deg,
-          #ff6ec787,
-          #8a4fffad,
-          var(--moonlight-silver)
-        );
-
         z-index: -1;
         animation: border-glow 3s linear infinite paused;
         opacity: 0;
@@ -115,6 +108,12 @@
       }
 
       .card:hover::before {
+        background: linear-gradient(
+          45deg,
+          #ff6ec787,
+          #8a4fffad,
+          var(--moonlight-silver)
+        );
         animation-play-state: running;
         opacity: 0.5;
       }
