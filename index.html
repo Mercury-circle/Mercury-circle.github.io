@@ -169,6 +169,52 @@
         box-shadow: 0 0 15px var(--nebula-pink);
       }
 
+      .platform-selector {
+        position: relative;
+        margin-top: 1.5rem;
+      }
+
+      .toggle-btn {
+        background: var(--card-bg);
+        border: 1px solid var(--cosmic-purple);
+        color: var(--moonlight-silver);
+        padding: 0.8rem 1.5rem;
+        border-radius: 8px;
+        cursor: pointer;
+        width: 100%;
+        transition: all 0.3s ease;
+      }
+
+      .platform-options {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--card-bg);
+        border-radius: 8px;
+        margin-top: 0.5rem;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .platform-selector:hover .platform-options {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .platform-options a {
+        display: block;
+        padding: 0.8rem;
+        color: var(--moonlight-silver);
+        text-decoration: none;
+        transition: background 0.2s ease;
+      }
+
+      .platform-options a:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+
       @media (max-width: 1024px) {
         .social-cards {
           grid-template-columns: repeat(2, 1fr);
@@ -203,7 +249,15 @@
           <i class="fab fa-github social-icon"></i>
           <h2>Code Galaxy</h2>
           <p>探索我的代码宇宙与开源星球</p>
-          <a href="https://github.com/Mercury-circle" target="_blank">GitHub</a>
+          <div class="platform-selector">
+            <button class="toggle-btn">
+              <i class="fab fa-github"></i> 选择平台 ▼
+            </button>
+            <div class="platform-options">
+              <a href="https://github.com/Mercury-circle">GitHub</a>
+              <a href="https://gitee.com/yourprofile">Gitee</a>
+            </div>
+          </div>
         </div>
 
         <!-- 知识星球 -->
