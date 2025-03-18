@@ -3,96 +3,138 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MERCURY SPACE</title>
+    <title><%= config.title %></title>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"
     />
     <style>
       :root {
-        --primary-color: #2c3e50;
-        --secondary-color: #3498db;
-        --card-bg: rgba(255, 255, 255, 0.9);
+        /* 保持粉紫系配色 */
+        --stardust-white: #f4f3fe;
+        --nebula-pink: #ff6ec7;
+        --cosmic-purple: #8a4fff;
+        --moonlight-silver: #d0d5f9;
+        --card-bg: rgba(244, 243, 254, 0.15);
+        --cyber-orange: #ff9a35; /* 新增点缀色 */
       }
 
-      body {
-        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-        min-height: 100vh;
-        font-family: "Helvetica Neue", Arial, sans-serif;
-        margin: 0;
-        padding: 2rem;
+      /* 标题特效升级 */
+      .title {
+        font-size: 4rem;
+        margin: 2rem 0;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        position: relative;
+        display: inline-block;
       }
 
-      .container {
-        max-width: 1200px;
-        margin: 0 auto;
+      .title span:first-child {
+        background: linear-gradient(
+          45deg,
+          var(--nebula-pink) 30%,
+          var(--cyber-orange) 70%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: mercury-glow 2s ease-in-out infinite;
       }
 
-      .hero {
-        text-align: center;
-        margin-bottom: 3rem;
+      .title span:last-child {
+        background: linear-gradient(
+          45deg,
+          var(--cyber-orange) 30%,
+          var(--cosmic-purple) 70%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: space-glow 2s ease-in-out infinite;
       }
 
-      .avatar {
-        width: 150px;
-        height: 150px;
-        border-radius: 50%;
-        border: 3px solid var(--primary-color);
-        margin: 2rem auto;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      @keyframes mercury-glow {
+        0% {
+          text-shadow: 0 0 10px var(--nebula-pink);
+        }
+        50% {
+          text-shadow: 0 0 20px var(--nebula-pink), 0 0 30px var(--cyber-orange);
+        }
+        100% {
+          text-shadow: 0 0 10px var(--nebula-pink);
+        }
       }
 
-      .social-cards {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 2rem;
-        padding: 2rem;
+      @keyframes space-glow {
+        0% {
+          text-shadow: 0 0 10px var(--cosmic-purple);
+        }
+        50% {
+          text-shadow: 0 0 20px var(--cosmic-purple),
+            0 0 30px var(--moonlight-silver);
+        }
+        100% {
+          text-shadow: 0 0 10px var(--cosmic-purple);
+        }
       }
 
+      /* 卡片特效升级 */
       .card {
-        background: var(--card-bg);
-        border-radius: 15px;
-        padding: 2rem;
-        text-align: center;
-        transition: transform 0.3s ease;
-        backdrop-filter: blur(10px);
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        /* 保持原有样式 */
+        overflow: visible; /* 允许特效溢出 */
+      }
+
+      .card::after {
+        content: "";
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        background: linear-gradient(
+          45deg,
+          var(--nebula-pink),
+          var(--cyber-orange),
+          var(--cosmic-purple)
+        );
+        z-index: -1;
+        animation: border-run 3s linear infinite;
+        opacity: 0;
+        transition: opacity 0.3s;
+        border-radius: 20px;
+      }
+
+      .card:hover::after {
+        opacity: 0.8;
+      }
+
+      @keyframes border-run {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
       }
 
       .card:hover {
-        transform: translateY(-5px);
+        transform: translateY(-10px) scale(1.05);
+        box-shadow: 0 20px 40px rgba(138, 79, 255, 0.3);
       }
 
-      .social-icon {
-        font-size: 2.5rem;
-        margin-bottom: 1rem;
-        color: var(--secondary-color);
+      /* 新增悬浮粒子特效 */
+      .card:hover .social-icon {
+        animation: icon-float 1s ease-in-out infinite;
       }
 
-      .card h2 {
-        color: var(--primary-color);
-        margin: 1rem 0;
-      }
-
-      .card p {
-        color: #666;
-        line-height: 1.6;
-      }
-
-      .card a {
-        display: inline-block;
-        margin-top: 1rem;
-        padding: 0.8rem 1.5rem;
-        background: var(--secondary-color);
-        color: white !important;
-        border-radius: 25px;
-        text-decoration: none;
-        transition: background 0.3s ease;
-      }
-
-      @media (max-width: 768px) {
-        .social-cards {
-          grid-template-columns: 1fr;
+      @keyframes icon-float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-5px);
         }
       }
     </style>
@@ -101,7 +143,10 @@
     <div class="container">
       <div class="hero">
         <img src="/images/avatar.jpg" alt="Avatar" class="avatar" />
-        <h1><%= config.author %></h1>
+        <h1 class="title">
+          <span>MERCURY</span>
+          <span>SPACE</span>
+        </h1>
         <p><%= config.description %></p>
       </div>
 
@@ -109,35 +154,29 @@
         <!-- GitHub Card -->
         <div class="card">
           <i class="fab fa-github social-icon"></i>
-          <h2>GitHub</h2>
-          <p>查看我的开源项目和技术分享</p>
-          <a href="https://github.com/yourusername" target="_blank">访问主页</a>
-        </div>
-
-        <!-- 微博 Card -->
-        <div class="card">
-          <i class="fab fa-weibo social-icon"></i>
-          <h2>微博</h2>
-          <p>关注我的日常分享和生活动态</p>
-          <a href="https://weibo.com/yourusername" target="_blank">立即关注</a>
-        </div>
-
-        <!-- 知乎 Card -->
-        <div class="card">
-          <i class="fab fa-zhihu social-icon"></i>
-          <h2>知乎</h2>
-          <p>阅读我的技术文章和行业见解</p>
-          <a href="https://zhihu.com/people/yourusername" target="_blank"
-            >查看回答</a
+          <h2>Code Galaxy</h2>
+          <p>探索我的代码宇宙与开源星球</p>
+          <a href="https://github.com/Mercury-circle" target="_blank"
+            >星际漫游</a
           >
         </div>
 
-        <!-- 邮箱 Card -->
+        <!-- 知识宝库 -->
         <div class="card">
-          <i class="fas fa-envelope social-icon"></i>
-          <h2>联系我</h2>
-          <p>商务合作或技术交流请邮件联系</p>
-          <a href="mailto:your.email@example.com">发送邮件</a>
+          <i class="fas fa-brain social-icon"></i>
+          <h2>Neuro Cosmos</h2>
+          <p>技术洞见与思维火花的神经宇宙</p>
+          <a href="https://zhihu.com/people/yourusername" target="_blank"
+            >思维跃迁</a
+          >
+        </div>
+
+        <!-- 量子通讯 -->
+        <div class="card">
+          <i class="fas fa-satellite social-icon"></i>
+          <h2>Quantum Link</h2>
+          <p>通过量子纠缠建立跨维度联系</p>
+          <a href="mailto:your.email@example.com">发送超波</a>
         </div>
       </div>
     </div>
