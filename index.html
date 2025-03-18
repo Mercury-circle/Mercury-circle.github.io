@@ -26,19 +26,6 @@
         color: var(--stardust-white);
       }
 
-      @keyframes title-glow {
-        0% {
-          text-shadow: 0 0 10px var(--nebula-pink);
-        }
-        50% {
-          text-shadow: 0 0 20px var(--nebula-pink),
-            0 0 30px var(--cosmic-purple);
-        }
-        100% {
-          text-shadow: 0 0 10px var(--nebula-pink);
-        }
-      }
-
       .container {
         max-width: 1200px;
         margin: 0 auto;
@@ -51,17 +38,16 @@
       }
 
       .avatar {
-        width: 180px;
-        height: 180px;
+        width: 120px;
+        height: 120px;
         border-radius: 50%;
-        border: 3px solid var(--moonlight-silver);
-        margin: 2rem auto;
-        box-shadow: 0 0 30px var(--cosmic-purple);
+        margin: 1rem auto;
+        box-shadow: 0 0 30px #59565e;
       }
 
       .title {
         font-size: 3.5rem;
-        margin: 2rem 0;
+        margin: 1.5rem 0 2rem;
         background: linear-gradient(
           45deg,
           var(--nebula-pink) 50%,
@@ -69,7 +55,6 @@
         );
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        animation: title-glow 2s infinite;
         text-transform: uppercase;
         letter-spacing: 4px;
         font-family: "Orbitron", sans-serif;
@@ -218,26 +203,24 @@
           <i class="fab fa-github social-icon"></i>
           <h2>Code Galaxy</h2>
           <p>探索我的代码宇宙与开源星球</p>
-          <a href="https://github.com/Mercury-circle" target="_blank"
-            >星际穿越</a
-          >
+          <a href="https://github.com/Mercury-circle" target="_blank">GitHub</a>
         </div>
 
         <!-- 知识星球 -->
         <div class="card">
           <i class="fas fa-brain social-icon"></i>
-          <h2>知识星云</h2>
+          <h2>DAYDAY UP</h2>
           <p>技术文章与深度思考的聚集地</p>
-          <a href="https://zhihu.com/people/yourusername" target="_blank"
-            >思维跃迁</a
+          <a href="https://blog.csdn.net/Noctiflorous_s" target="_blank"
+            >CSDN</a
           >
         </div>
 
         <!-- 量子通讯 -->
         <div class="card">
-          <i class="fas fa-envelope social-icon"></i>
-          <h2>量子通讯</h2>
-          <p>通过加密通道建立星际联系</p>
+          <i class="fas fa-table-list social-icon"></i>
+          <h2>Project Overview</h2>
+          <p>项目概述以及DEMO运行情况</p>
           <a href="mailto:your.email@example.com">发送超波</a>
         </div>
       </div>
